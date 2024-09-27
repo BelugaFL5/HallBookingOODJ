@@ -1,1 +1,4 @@
-ayam;ayam;SIOW;
+1;mh;12345678;customer;
+2;siowAyamMan;ayamman;admin;
+3;siowhanbin;siowhanbin;admin;
+4;Hariz;hariz123;customer;
