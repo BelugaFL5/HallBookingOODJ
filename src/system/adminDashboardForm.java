@@ -147,22 +147,19 @@ public class adminDashboardForm extends javax.swing.JFrame {
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         // TODO add your handling code here:
-        loginForm ObjL = new loginForm();
-        ObjL.setVisible(true);
+        new loginForm().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnManagerSchedulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManagerSchedulerActionPerformed
         // TODO add your handling code here:
-        ManageSchedulerForm msf = new ManageSchedulerForm();
-        msf.setVisible(true);
+        new ManageSchedulerForm().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnManagerSchedulerActionPerformed
 
     private void btnManageUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageUserActionPerformed
         // TODO add your handling code here:
-        ManageUser mu = new ManageUser();
-        mu.setVisible(true);
+        new ManageUser().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnManageUserActionPerformed
 
@@ -172,8 +169,7 @@ public class adminDashboardForm extends javax.swing.JFrame {
 
     private void btnAdminRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminRegisterActionPerformed
         // TODO add your handling code here:
-        AdminRegisterForm ar = new AdminRegisterForm();
-        ar.setVisible(true);
+        new AdminRegisterForm().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAdminRegisterActionPerformed
 

@@ -202,7 +202,8 @@ public class AdminRegisterForm extends javax.swing.JFrame {
         
            // Check if password is at least 8 characters long
         if (password.length() < 8 || password.length() > 12) {
-            JOptionPane.showMessageDialog(null, "Password must be at least 8 characters long!");
+            JOptionPane.showMessageDialog(null, "Password must be 8 to 12 characters !");
+            return;
         }     
         // Check if passwords match
         if (confirmPwd.equals(password)) {

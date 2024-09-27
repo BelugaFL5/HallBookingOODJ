@@ -2,3 +2,5 @@
 2;siowAyamMan;ayamman;admin;
 3;siowhanbin;siowhanbin;admin;
 4;Hariz;hariz123;customer;
+5;scheduler;12345678;scheduler;
+6;MasterTay;MasterTay;admin;

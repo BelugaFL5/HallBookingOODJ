@@ -14,12 +14,12 @@ import static system.User.generateUserID;
  *
  * @author SIOW HAN BIN
  */
-public class CustomerRegisterForm extends javax.swing.JFrame {
+public class SchedulerRegisterForm extends javax.swing.JFrame {
 
     /**
      * Creates new form RegisterForm
      */
-    public CustomerRegisterForm() {
+    public SchedulerRegisterForm() {
         initComponents();
     }
 
@@ -42,24 +42,24 @@ public class CustomerRegisterForm extends javax.swing.JFrame {
         pwdTxt = new javax.swing.JPasswordField();
         confirmPwdTxt = new javax.swing.JPasswordField();
         registerBtn = new java.awt.Button();
-        clearBtn = new java.awt.Button();
         btnBack = new java.awt.Button();
+        clearBtn1 = new java.awt.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setFont(new java.awt.Font("Corbel", 3, 48)); // NOI18N
-        jLabel1.setText("Register");
+        jLabel1.setText("Add Scheduler");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(185, 185, 185)
+                .addGap(120, 120, 120)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,19 +99,19 @@ public class CustomerRegisterForm extends javax.swing.JFrame {
             }
         });
 
-        clearBtn.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        clearBtn.setLabel("Clear");
-        clearBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clearBtnActionPerformed(evt);
-            }
-        });
-
         btnBack.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         btnBack.setLabel("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
+            }
+        });
+
+        clearBtn1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        clearBtn1.setLabel("Clear");
+        clearBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearBtn1ActionPerformed(evt);
             }
         });
 
@@ -135,21 +135,27 @@ public class CustomerRegisterForm extends javax.swing.JFrame {
                     .addComponent(pwdTxt)
                     .addComponent(confirmPwdTxt))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(102, 102, 102)
-                .addComponent(registerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
-                .addComponent(clearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(132, 132, 132))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addComponent(registerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addContainerGap(353, Short.MAX_VALUE)
+                    .addComponent(clearBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(122, 122, 122)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(usrName)
                     .addComponent(userNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -161,10 +167,13 @@ public class CustomerRegisterForm extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(confirmPwdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(clearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(registerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(33, 33, 33)
+                .addComponent(registerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addContainerGap(244, Short.MAX_VALUE)
+                    .addComponent(clearBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -182,7 +191,7 @@ public class CustomerRegisterForm extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 18, Short.MAX_VALUE))
+                .addGap(0, 56, Short.MAX_VALUE))
         );
 
         pack();
@@ -196,7 +205,7 @@ public class CustomerRegisterForm extends javax.swing.JFrame {
         
            // Check if password is at least 8 characters long
         if (password.length() < 8 || password.length() > 12) {
-            JOptionPane.showMessageDialog(null, "Password must be at 8 to 12 characters long!");
+            JOptionPane.showMessageDialog(null, "Password must be 8 to 12 characters !");
         return;
         }     
         // Check if passwords match
@@ -207,8 +216,7 @@ public class CustomerRegisterForm extends javax.swing.JFrame {
             user.add(userID); // First value will be userID
             user.add(userNameTxt.getText()); // Username
             user.add(password); // Password
-            user.add("customer"); // Role as "customer" since this is a registration form for customers
-      
+            user.add("scheduler"); 
          
             // Append new user details into the file
             try (FileWriter fw = new FileWriter("user.txt", true)) {
@@ -236,23 +244,21 @@ public class CustomerRegisterForm extends javax.swing.JFrame {
 
     
     
-    private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         userNameTxt.setText("");
         pwdTxt.setText("");
         confirmPwdTxt.setText("");
        
-    }//GEN-LAST:event_clearBtnActionPerformed
+    }//GEN-LAST:event_btnBackActionPerformed
 
     private void confirmPwdTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmPwdTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_confirmPwdTxtActionPerformed
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+    private void clearBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtn1ActionPerformed
         // TODO add your handling code here:
-        new loginForm().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnBackActionPerformed
+    }//GEN-LAST:event_clearBtn1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,26 +277,28 @@ public class CustomerRegisterForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CustomerRegisterForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SchedulerRegisterForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CustomerRegisterForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SchedulerRegisterForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CustomerRegisterForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SchedulerRegisterForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CustomerRegisterForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SchedulerRegisterForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new CustomerRegisterForm().setVisible(true);
+            new SchedulerRegisterForm().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button btnBack;
-    private java.awt.Button clearBtn;
+    private java.awt.Button clearBtn1;
     private javax.swing.JPasswordField confirmPwdTxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

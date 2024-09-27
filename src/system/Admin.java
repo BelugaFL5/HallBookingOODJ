@@ -12,8 +12,5 @@ public class Admin extends User {
     public Admin(String userID, String username, String password, String role) {
         super(userID,username, password, "Admin");
     }
-    //admin authetication where it is read from text file
-      private boolean authenticateAdmin(String username, String password) {
-        return equals(username) && equals(password);
-    }
+    
 }
