@@ -74,6 +74,11 @@ public class LoginForm extends javax.swing.JFrame {
         JLabel.setText("Username:");
 
         userNameTxt.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        userNameTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userNameTxtActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setText("Password:");
@@ -185,27 +190,22 @@ public class LoginForm extends javax.swing.JFrame {
         }
         
         //login fail
-        if(!status){
-            JOptionPane.showMessageDialog(null,"Invalid Username or Password");
-        }else{//login success
-            this.dispose();
-            new adminDashboardForm().setVisible(true);
-        }
         
-        br.close(); // close the BufferedReader
-        fr.close(); // close the FileReader
-
         if (status) {
             JOptionPane.showMessageDialog(null, "Login successful. Welcome, " + userNameTxt.getText() + "!");
             // You can add code here to open the main application window
             this.dispose(); // Close the login form
             // new MainAppForm().setVisible(true); // Open the main application window
-        } else {
+        } else if (!status){
             JOptionPane.showMessageDialog(null, "Login failed. Invalid username or password.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        
+        br.close(); // close the BufferedReader
+        fr.close(); // close the FileReader
+
     } catch (IOException e) {
         JOptionPane.showMessageDialog(null, "An error occurred while reading the user data: " + e.getMessage());
-    }      //Mr Huzaifah
+    }      
  
     }//GEN-LAST:event_LoginBtnActionPerformed
 
@@ -215,6 +215,10 @@ public class LoginForm extends javax.swing.JFrame {
         pwdTxt.setText("");
        
     }//GEN-LAST:event_clearBtnActionPerformed
+
+    private void userNameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_userNameTxtActionPerformed
 
     /**
      * @param args the command line arguments
