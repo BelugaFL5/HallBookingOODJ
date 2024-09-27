@@ -117,20 +117,22 @@ public class adminDashboardForm extends javax.swing.JFrame {
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         // TODO add your handling code here:
-        new LoginForm().setVisible(true);
+        LoginForm ObjL = new LoginForm();
+        ObjL.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnManagerSchedulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManagerSchedulerActionPerformed
         // TODO add your handling code here:
-        new ManageSchedulerForm();
+        ManageSchedulerForm msf = new ManageSchedulerForm();
+        msf.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnManagerSchedulerActionPerformed
 
     private void btnManageUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageUserActionPerformed
         // TODO add your handling code here:
-        
-        new ManageUser().setVisible();
+        ManageUser mu = new ManageUser();
+        mu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnManageUserActionPerformed
 

@@ -193,9 +193,9 @@ public class LoginForm extends javax.swing.JFrame {
         
         if (status) {
             JOptionPane.showMessageDialog(null, "Login successful. Welcome, " + userNameTxt.getText() + "!");
-            // You can add code here to open the main application window
+            
             this.dispose(); // Close the login form
-            // new MainAppForm().setVisible(true); // Open the main application window
+            
         } else if (!status){
             JOptionPane.showMessageDialog(null, "Login failed. Invalid username or password.", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -220,6 +220,7 @@ public class LoginForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_userNameTxtActionPerformed
 
+    //Delete psvm later
     /**
      * @param args the command line arguments
      */

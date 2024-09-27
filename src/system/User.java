@@ -54,7 +54,5 @@ public class User {
         this.role = role;
     }
 
-    public void logout() {
-        System.out.println(this.username + " has logged out.");
-    }
+   
 }
