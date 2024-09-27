@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import static system.User.generateUserID;
 
 /**
  *
@@ -190,32 +191,46 @@ public class RegisterForm extends javax.swing.JFrame {
 
     private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed
         // TODO add your handling code here:
-      try {
+        try {
         String confirmPwd = new String(confirmPwdTxt.getPassword());
         String password = new String(pwdTxt.getPassword());
+        
+        // Check if passwords match
         if (confirmPwd.equals(password)) {
+            // Initialize variables to hold user data
             ArrayList<String> user = new ArrayList<>();
-            user.add(userNameTxt.getText()); // it will be the first value
-            user.add(password); // add password into the arraylist
-            user.add(fullNameTxt.getText());
-
-            try (FileWriter fw = new FileWriter("user.txt", true) // if not set true, will overwrite
-            ) {
-                fw.write(user.get(0) + ";" + user.get(1) + ";" + user.get(2) + ";\n");
+            String userID = generateUserID();  // Generate new user ID
+            user.add(userID); // First value will be userID
+            user.add(userNameTxt.getText()); // Username
+            user.add(password); // Password
+            user.add("customer"); // Role as "customer" since this is a registration form for customers
+            
+            // Append new user details into the file
+            try (FileWriter fw = new FileWriter("user.txt", true)) {
+                fw.write(user.get(0) + ";" + user.get(1) + ";" + user.get(2) + ";" + user.get(3) + ";\n");
             }
 
-            JOptionPane.showMessageDialog(null, "Your username is: " + userNameTxt.getText());
-        this.dispose();
-         new LoginForm().setVisible(true);
+            // Notify the user about successful registration
+            JOptionPane.showMessageDialog(null, "Registration successful! Your username is: " + userNameTxt.getText());
+            
+            // Close registration form and open login form
+            this.dispose();
+            new loginForm().setVisible(true);
+
         } else {
-            JOptionPane.showMessageDialog(null, "Your password does not match");
+            // Passwords don't match
+            JOptionPane.showMessageDialog(null, "Password and confirm password do not match!");
         }
+
     } catch (IOException e) {
+        // Handle any file-related errors
         JOptionPane.showMessageDialog(null, "An error occurred while saving the user data: " + e.getMessage());
     }
-       
+
     }//GEN-LAST:event_registerBtnActionPerformed
 
+    
+    
     private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
         // TODO add your handling code here:
         userNameTxt.setText("");

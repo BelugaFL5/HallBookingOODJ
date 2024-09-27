@@ -4,6 +4,10 @@
  */
 package system;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 /**
  *
  * @author SIOW HAN BIN
@@ -54,5 +58,27 @@ public class User {
         this.role = role;
     }
 
-   
+  // Function to generate a new user ID by incrementing the last ID from the file
+public static String generateUserID() {
+    String lastID = "0"; // Start with ID 0 if the file is empty
+
+    try (BufferedReader br = new BufferedReader(new FileReader("user.txt"))) {
+        String line;
+        String[] userDetails;
+
+        // Read through the file to find the last user ID
+        while ((line = br.readLine()) != null) {
+            userDetails = line.split(";");
+            lastID = userDetails[0]; // Get the last user ID
+        }
+    } catch (IOException e) {
+        // If file doesn't exist or there's an error, assume it's a new file
+        System.out.println("File not found or error reading file. Starting with userID 0.");
+    }
+
+    // Increment the last ID by 1 and return the new ID
+    int newID = Integer.parseInt(lastID) + 1;
+    return String.valueOf(newID);
+} 
+
 }
