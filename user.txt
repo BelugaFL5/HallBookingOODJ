@@ -4,3 +4,5 @@
 4;Hariz;hariz123;customer;
 5;scheduler;12345678;scheduler;
 6;MasterTay;MasterTay;admin;
+7;Rama;1234567888;scheduler;
+8;Power;pawa1234;scheduler;
