@@ -4,6 +4,15 @@
  */
 package system;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author SIOW HAN BIN
@@ -15,7 +24,45 @@ public class ManageSchedulerForm extends javax.swing.JFrame {
      */
     public ManageSchedulerForm() {
         initComponents();
+        loadSchedulerStaffData();
+        loginForm login = new loginForm();
+            usernameLbl.setText(login.getusername());
     }
+// Load scheduler staff data from file into the table
+    private void loadSchedulerStaffData() {
+
+        DefaultTableModel model = (DefaultTableModel) schedulerTbl.getModel();
+        model.setRowCount(0);  // Clear existing rows
+        try (BufferedReader br = new BufferedReader(new FileReader("user.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] userDetails = line.split(";");
+                if (userDetails[3].equals("scheduler")) { // Only load scheduler staff
+                    model.addRow(new Object[]{userDetails[0], userDetails[1], userDetails[3]});
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error loading scheduler staff data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+   
+    public String getSelectedUserID() {
+        int selectedRow = schedulerTbl.getSelectedRow();
+        if (selectedRow != -1) {
+            return (String) schedulerTbl.getValueAt(selectedRow, 0); // Get userID from the first column
+        }
+        return null; // Return null if no row is selected
+    }
+    // Getter to retrieve the username of the selected row
+    public String getSelectedUsername() {
+        int selectedRow = schedulerTbl.getSelectedRow();
+        if (selectedRow != -1) {
+            return (String) schedulerTbl.getValueAt(selectedRow, 1); // Get username from the second column
+        }
+        return null; // Return null if no row is selected
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,11 +79,18 @@ public class ManageSchedulerForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        schedulerTbl = new javax.swing.JTable();
+        searchBtn = new javax.swing.JButton();
+        clearBtn = new javax.swing.JButton();
+        searchTxt = new javax.swing.JTextField();
+        usernameLbl = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        btnDeleteScheduler = new javax.swing.JButton();
+        btnEditScheduler = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnAddScheduler.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        btnAddScheduler.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAddScheduler.setText("Add New Scheduler");
         btnAddScheduler.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,16 +120,16 @@ public class ManageSchedulerForm extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(98, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(91, 91, 91))
+                .addGap(97, 97, 97))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(25, 25, 25)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         btnBack.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -86,53 +140,113 @@ public class ManageSchedulerForm extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        schedulerTbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        schedulerTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "User ID", "User Name", "Role"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(schedulerTbl);
+
+        searchBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchBtn.setText("Search");
+        searchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBtnActionPerformed(evt);
+            }
+        });
+
+        clearBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        clearBtn.setText("Clear");
+        clearBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearBtnActionPerformed(evt);
+            }
+        });
+
+        usernameLbl.setText("jLabel2");
+
+        jLabel2.setText("Welcome to Manage Scheduler");
+
+        btnDeleteScheduler.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnDeleteScheduler.setText("Delete Scheduler");
+        btnDeleteScheduler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteSchedulerActionPerformed(evt);
+            }
+        });
+
+        btnEditScheduler.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEditScheduler.setText("Edit Scheduler");
+        btnEditScheduler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditSchedulerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnBack)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(usernameLbl)
+                .addGap(153, 153, 153)
                 .addComponent(btnLogout)
                 .addGap(22, 22, 22))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(62, 62, 62)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addComponent(btnAddScheduler, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnAddScheduler)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDeleteScheduler)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEditScheduler))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(searchBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(clearBtn)
+                        .addGap(15, 15, 15)
+                        .addComponent(searchTxt)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(usernameLbl)
+                        .addComponent(jLabel2)))
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(3, 3, 3)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAddScheduler)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddScheduler)
+                    .addComponent(btnDeleteScheduler)
+                    .addComponent(btnEditScheduler))
+                .addContainerGap(217, Short.MAX_VALUE))
         );
 
         pack();
@@ -155,6 +269,156 @@ public class ManageSchedulerForm extends javax.swing.JFrame {
         new adminDashboardForm().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+        // TODO add your handling code here:
+                                                     
+    String search = searchTxt.getText().trim(); // Get the input from the search field
+
+    if (search.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Please enter a search term.", "Error", JOptionPane.ERROR_MESSAGE);
+        return; // Exit if the search field is empty
+    }
+
+    // Clear the current table data
+    DefaultTableModel model = (DefaultTableModel) schedulerTbl.getModel();
+    model.setRowCount(0);
+
+    try {
+        // Open the file and read the content
+        FileReader fr = new FileReader("user.txt");
+        BufferedReader br = new BufferedReader(fr);
+        String read;
+
+        while ((read = br.readLine()) != null) {
+            String[] userDetails = read.split(";");
+
+            // Check if the record is a scheduler and matches the search term (by userID or username)
+            if (userDetails[3].equalsIgnoreCase("scheduler") &&
+                (userDetails[0].contains(search) || userDetails[1].contains(search))) {
+                
+                // Add matching rows to the table
+                model.addRow(new Object[]{userDetails[0], userDetails[1], userDetails[3]});
+            }
+        }
+
+        br.close(); // Close BufferedReader
+        fr.close(); // Close FileReader
+
+        if (model.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "No matching schedulers found.", "Search Result", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(null, "Error searching schedulers: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+
+    }//GEN-LAST:event_searchBtnActionPerformed
+
+    private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
+        // TODO add your handling code here:
+            searchTxt.setText("");
+            // Reload the table to show all scheduler staff (without any filter)
+    DefaultTableModel model = (DefaultTableModel) schedulerTbl.getModel();
+    model.setRowCount(0); // Clear current table data
+    
+    try {
+        // Open the file and read the content
+        FileReader fr = new FileReader("user.txt");
+        BufferedReader br = new BufferedReader(fr);
+        String read;
+
+        while ((read = br.readLine()) != null) {
+            String[] userDetails = read.split(";");
+
+            // Check if the user is a scheduler
+            if (userDetails[3].equalsIgnoreCase("scheduler")) {
+                // Add all schedulers back to the table
+                model.addRow(new Object[]{userDetails[0], userDetails[1], userDetails[3]});
+            }
+        }
+
+        br.close(); // Close BufferedReader
+        fr.close(); // Close FileReader
+
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(null, "Error loading scheduler data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_clearBtnActionPerformed
+
+    private void btnDeleteSchedulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteSchedulerActionPerformed
+        // TODO add your handling code here:
+    try {
+        // Get the selected row in the table
+        int selectedRow = schedulerTbl.getSelectedRow();
+        
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(null, "Please select a scheduler to delete.", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Exit if no row is selected
+        }
+        
+        String userID = (String) schedulerTbl.getValueAt(selectedRow, 0); // Get userID from the selected row
+        
+        // Open the file and read the content
+        FileReader fr = new FileReader("user.txt");
+        BufferedReader br = new BufferedReader(fr);
+        String read;
+        
+        ArrayList<String> userList = new ArrayList<>();
+        
+        while ((read = br.readLine()) != null) {
+            String[] userDetails = read.split(";");
+            
+            // If the userID does not match the one to delete, keep the record
+            if (!userDetails[0].equals(userID)) {
+                userList.add(read); // Add the non-deleted user back to the list
+            }
+        }
+        
+        br.close(); // Close BufferedReader
+        fr.close(); // Close FileReader
+        
+        // Write updated list back to file
+        FileWriter fw = new FileWriter("user.txt");
+        BufferedWriter bw = new BufferedWriter(fw);
+        
+        for (String user : userList) {
+            bw.write(user + "\n");
+        }
+        
+        bw.close(); // Close BufferedWriter
+        fw.close(); // Close FileWriter
+        
+        JOptionPane.showMessageDialog(null, "Scheduler deleted successfully!");
+
+        // Reload the staff table after deletion
+        loadSchedulerStaffData(); 
+        
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(null, "Error deleting staff: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+
+    }//GEN-LAST:event_btnDeleteSchedulerActionPerformed
+
+    private void btnEditSchedulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditSchedulerActionPerformed
+        // TODO add your handling code here:
+     int selectedRow = schedulerTbl.getSelectedRow();
+
+    if (selectedRow != -1) {
+        // Get userID and pass it along with ManageSchedulerForm instance
+        String userID = getSelectedUserID();
+        String username = getSelectedUsername();
+        
+        // Pass both userID and the instance of ManageSchedulerForm to SchedulerUpdateForm
+        SchedulerUpdateForm updateForm = new SchedulerUpdateForm(this,userID, username);
+        updateForm.setVisible(true);
+        this.dispose();  // Optionally close the ManageSchedulerForm
+    } else {
+        JOptionPane.showMessageDialog(null, "Please select a scheduler to edit.");
+    }
+    }//GEN-LAST:event_btnEditSchedulerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -194,10 +458,17 @@ public class ManageSchedulerForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddScheduler;
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnDeleteScheduler;
+    private javax.swing.JButton btnEditScheduler;
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton clearBtn;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable schedulerTbl;
+    private javax.swing.JButton searchBtn;
+    private javax.swing.JTextField searchTxt;
+    private javax.swing.JLabel usernameLbl;
     // End of variables declaration//GEN-END:variables
 }
