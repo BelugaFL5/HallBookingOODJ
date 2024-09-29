@@ -87,7 +87,7 @@ public class adminDashboardForm extends javax.swing.JFrame {
         });
 
         btnManageBooking.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
-        btnManageBooking.setText("Manage Booking");
+        btnManageBooking.setText("View Booking");
         btnManageBooking.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManageBookingActionPerformed(evt);
@@ -159,12 +159,14 @@ public class adminDashboardForm extends javax.swing.JFrame {
 
     private void btnManageUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageUserActionPerformed
         // TODO add your handling code here:
-        new ManageUser().setVisible(true);
+        new ManageUserForm().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnManageUserActionPerformed
 
     private void btnManageBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageBookingActionPerformed
         // TODO add your handling code here:
+        new ManageBookingForm().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnManageBookingActionPerformed
 
     private void btnAdminRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminRegisterActionPerformed
