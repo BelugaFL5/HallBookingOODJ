@@ -9,3 +9,5 @@
 9;Super;admin123;admin
 10;Cincai;99999999;scheduler
 11;Hariz5677;hariz128;customer
+12;Abdul Rahman;abdul123;scheduler
+13;chicken Rice;chicken123;manager;
