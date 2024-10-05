@@ -154,7 +154,7 @@ public class ManageBookingForm extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "BookingID", "CustomerID", "Hall Type", "Booking Date", "Start Time", "End Time", "Total Cost", "Status", "Remarks"
+                "BookingID", "username", "Hall Type", "Booking Date", "Start Time", "End Time", "Total Cost", "Status", "Remarks"
             }
         ));
         jScrollPane1.setViewportView(bookingTbl);
@@ -175,7 +175,7 @@ public class ManageBookingForm extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Search by bookingID, customerID, hallType, bookingDate, or status");
+        jLabel3.setText("Search by bookingID, username, hallType, bookingDate, or status");
 
         showUpcomingBookingbtn.setText("Show Upcoming Booking");
         showUpcomingBookingbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -281,7 +281,7 @@ public class ManageBookingForm extends javax.swing.JFrame {
             // Extend the search to additional fields (hallType, status, etc.)
             if (bookingDetails[0].contains(search) || bookingDetails[1].contains(search) || 
                 bookingDetails[2].contains(search) || bookingDetails[3].contains(search) || 
-                bookingDetails[7].contains(search)) { // Search by bookingID, customerID, hallType, bookingDate, or status
+                bookingDetails[7].contains(search)) { // Search by bookingID, username, hallType, bookingDate, or status
                 
                 model.addRow(new Object[]{bookingDetails[0], bookingDetails[1], bookingDetails[2], bookingDetails[3], bookingDetails[4], bookingDetails[5], bookingDetails[6], bookingDetails[7], bookingDetails[8]});
             }
